@@ -1,0 +1,27 @@
+{
+  "name": "clusteringdetail",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "gulp serve",
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.7.2",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.3.0",
+    "gulp-bootlint": "^0.5.0",
+    "gulp-cached": "^1.1.0",
+    "gulp-jshint": "^1.10.0",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.0.1",
+    "gulp-task-listing": "^1.0.0",
+    "jshint-stylish": "^1.0.2",
+    "main-bower-files": "^2.8.0"
+  }
+}

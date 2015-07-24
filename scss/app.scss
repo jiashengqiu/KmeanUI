@@ -1,0 +1,270 @@
+$bg-color: #eef2f6;
+$color-0: #526b82;
+$color-1: #2c86c2; $color-11: #73d8e6;
+$color-2: #2cb89d; $color-22: #73e6b6;
+$color-3: #a369be;
+$color-4: #c24b47;
+$color-5: #e87939;
+
+body {
+  color: $color-0;
+  background-color: $bg-color;
+}
+
+#cdcanvas {
+  position: absolute;
+  z-index: 500;
+  display: none;
+  //border: 1px solid red;
+  left: 0;
+  top: 0;
+  width: 150px;
+  height: 150px;
+}
+
+.callout-1 {
+  border-left: 10px solid $color-11;
+}
+.callout-2 {
+  border-left: 10px solid $color-22;
+}
+
+.indicator {
+  position: absolute;
+  color: $color-1;
+}
+
+.close {
+  float: none;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.btn-plus {
+  padding: 7px;
+  border-radius: 4px;
+  background-color: darken($bg-color, 10%);
+  color: #fff;
+}
+
+
+.root {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-height: 750px;
+  height: 100%;
+  display: flex;
+}
+
+.cond-inner{
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.nav-sidebar {
+  li {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  select {
+    display: inline-block;
+    width: 160px;
+  }
+}
+
+
+/* part-group */
+.part-group {
+  display: flex;
+
+  > .left {
+    width: 185px;
+  }
+
+  > .right {
+    width: 30px + 165px * 4;
+  }
+}
+
+
+.cluster-group-graph {
+  min-height: 185px;
+
+  > li {
+    width: 155px;
+
+    &:nth-child(1) {
+      color: $color-1;
+    }
+    &:nth-child(2) {
+      color: $color-2;
+    }
+    &:nth-child(3) {
+      color: $color-3;
+    }
+    &:nth-child(4) {
+      color: $color-4;
+    }
+    &:nth-child(5) {
+      color: $color-5;
+    }
+  }
+
+  .caption {
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+  }
+
+  .cluster {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin-top: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #fff;
+
+    > div {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      font-weight: bold;
+      font-size: x-large;
+      text-shadow: -2px 1px 0 #815511, -3px 2px 0 #0a0e27;
+    }
+  }
+}
+
+.cluster-group-data {
+  border: 2px solid $bg-color;
+  border-radius: 4px;
+  margin-bottom: 0;
+  font-size: 1.5em;
+  color: #000;
+
+  > li {
+    width: 155px;
+    text-align: center;
+    padding: 4px 0;
+
+    &:nth-child(1) { border: 5px solid $color-11; border-radius: 4px;}
+    &:nth-child(2) { border: 5px solid $color-22; border-radius: 4px;}
+
+    ul.list-unstyled > li {
+      height: 56px + 4px;
+      padding-top: 0.7em;
+    }
+  }
+}
+
+.val-not-relevant {
+  color: lightgray;
+  font-size: x-small;
+}
+.val-primary {
+  font-weight: bold;
+}
+
+.most-important-vars-panel {
+  margin-top: 15px;
+
+  li {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    height: 56px;
+    margin: 4px 0;
+    padding: 5px 25px 5px 10px;
+    border: 1px solid $color-0;
+    border-left-width: 7px;
+    border-radius: 4px;
+  }
+}
+
+.desc-group {
+  margin-top: 20px;
+
+  > div {
+    //padding: 0 10px 10px 10px;
+  }
+}
+
+.see-more-vars {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+
+  background-color: #eef2f6;
+  border-left: 30px solid #fff;
+
+  color: $color-1;
+  font-weight: bold;
+
+  .more {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: x-large;
+  }
+
+  .indicator {
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+
+
+/* animate-fade */
+.animate-fade.ng-move,
+.animate-fade.ng-enter,
+.animate-fade.ng-leave {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.animate-fade.ng-leave.ng-leave-active,
+.animate-fade.ng-move,
+.animate-fade.ng-enter {
+  opacity:0;
+}
+
+.animate-fade.ng-leave,
+.animate-fade.ng-move.ng-move-active,
+.animate-fade.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+/* animate-show */
+.animate-show {
+  line-height: 1.5em;
+  opacity: 1;
+  padding: 0 10px 10px 10px;
+}
+
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px;
+}

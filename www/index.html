@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Clustering Detail Screen</title>
+
+  <!-- Bootstrap -->
+  <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <link href="css/app.css" rel="stylesheet"/>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-animate/angular-animate.js"></script>
+  <script src="lib/jquery/dist/jquery.js"></script>
+  <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="lib/fabric/dist/fabric.min.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/directives.js"></script>
+  <script src="lib/angularjs-camelCase-human/camelCaseToHuman.js"></script>
+
+</head>
+
+<body ng-controller="appCtrl">
+
+<div class="root">
+
+  <div class="main" ng-mousemove="mousemoveOnMain($event)">
+  <ul class="nav nav-tabs">
+  <li class="active"><a href="#">Home</a></li>
+  <li><a href="#">Menu 1</a></li>
+  <li><a href="#">Menu 2</a></li>
+  <li><a href="#">Menu 3</a></li>
+  </ul>
+    <div class="part-group">
+      <div class="left" style="position: relative;">
+        <div class="cond-inner">
+          <h4>Clusters who:</h4>
+          <ul class="nav nav-sidebar">
+
+            <li>
+              <select ng-model="analysisId" ng-options="item for item in listAnalysis" class="form-control">
+                <option value="">-- Clip a Coupon --</option>
+              </select>
+            
+              <div class="close"><span>&times;</span></div>
+            </li>
+
+            <!--<li>-->
+              <!--<div style="display: flex; align-items: center;">-->
+                <!--<div class="glyphicon glyphicon-plus btn-plus"></div>-->
+                <!--<div style="padding-left: 1em;">Add another parameter</div>-->
+              <!--</div>-->
+            <!--</li>-->
+          </ul>
+        </div>
+        <div style="position: absolute; bottom: 0;"><strong>MOST IMPORTANT VARIABLES</strong></div>
+      </div>
+
+      <div class="right" style="padding: 20px 0 20px 30px; position: relative; width: {{30 + data.clusters.length * 160}}px !important;">
+        <div class="glyphicon glyphicon-play indicator" style="left: 10px; top: 100px;"></div>
+        <ul class="list-inline cluster-group-graph">
+          <li ng-repeat="cluster in data.clusters" ng-init="cp=(cluster.userCount * 100 / data.population)">
+            <div class="caption">{{cluster.name | camelCaseToHuman}}</div>
+            <div class="cluster" back-img="{{clusterImage[$index]}}" >
+              <div>{{ cp | number: 1 }}%</div>
+            </div>
+          </li>
+        </ul>
+
+<!--         <div class="desc-group" ng-show="data.clusters.length > 0"  class="ng-hide">
+          <div class="callout-1 animate-show" ng-hide="visibleGreenArea">
+            Cluster 1 has a &quot;low&quot; number of &quot;App Open Counts&quot;, high number of prior searches and most within this cluster have made &quot;>1, <5&quot; purchases.
+          </div>
+          <div class="callout-2 animate-show" ng-show="visibleGreenArea">
+            This is a text area that describes what makes Cluster 2 different from Cluster 1. It also includes any major differences from other clusters (provided the differences are huge).
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <div class="part-group">
+      <div class="left">
+        <ul class="list-unstyled most-important-vars-panel">
+          <li ng-repeat="varname in mostImpVars | limitTo: varsLimit as result" class="animate-fade">
+            {{varname | camelCaseToHuman}}
+            <div class="close" ng-click="func.removeMostImpVar($index)">&times;</div>
+          </li>
+        </ul>
+      </div>
+      <div class="right" style="padding-left: 35px; width: {{30 + data.clusters.length * 160}}px !important;">
+        <ul class="list-inline cluster-group-data" ng-if="mostImpVars.length > 0">
+          <li  ng-repeat="cluster in data.clusters">
+            <ul class="list-unstyled">
+              <li class="animate-fade" ng-repeat="varname in mostImpVars | limitTo: varsLimit as result" ng-init="assess = func.assessValue(varname, cluster)">
+                <span ng-if="assess.style != 'val-not-relevant'">
+                  <span ng-if="assess.val < 1000" ng-class="assess.style">{{assess.val}}</span>
+                  <span ng-if="assess.val > 999" ng-class="assess.style">{{assess.val | number: 0}}</span>
+                </span>
+                <span ng-if="assess.style == 'val-not-relevant'" ng-class="assess.style">{{assess.val}}</span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="part-group bottom">
+      <div class="left" style="padding:10px 20px; background-color: #eef2f6;">{{countVars}} other variables examined</div>
+      <div class="right see-more-vars" style="width: {{30 + data.clusters.length * 160}}px !important;">
+        <button type="button" class="btn btn-link" ng-click="nextMostImpVars()">Click to see more variables</button>
+        <div class="more text-muted"><div class="glyphicon glyphicon-option-horizontal"></div></div>
+        <div class="glyphicon glyphicon-play indicator"></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<canvas id="cdcanvas" width="150" height="150"></canvas>
+<img src="img/cluster1.png" id="image1">
+<img src="img/cluster2.png" id="image2">
+
+</body>
+</html>
+
